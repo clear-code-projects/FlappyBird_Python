@@ -69,11 +69,13 @@ clock = pygame.time.Clock()
 game_font = pygame.font.Font('04B_19.ttf',40)
 
 # Game Variables
-gravity = 0.25
+fps = 60
+gravity = 0.45
 bird_movement = 0
 game_active = True
 score = 0
 high_score = 0
+
 
 bg_surface = pygame.image.load('assets/background-day.png').convert()
 bg_surface = pygame.transform.scale2x(bg_surface)
@@ -117,16 +119,17 @@ while True:
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			sys.exit()
-		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_SPACE and game_active:
+		if event.type in( pygame.KEYDOWN, pygame.MOUSEBUTTONUP):
+			flappy = pygame.mouse.get_pressed() or event.key == pygame.K_SPACE
+			if flappy and game_active:
 				bird_movement = 0
 				bird_movement -= 12
 				flap_sound.play()
-			if event.key == pygame.K_SPACE and game_active == False:
+			if flappy and game_active == False:
 				game_active = True
 				pipe_list.clear()
 				bird_rect.center = (100,512)
-				#bird_movement = 0
+				bird_movement = 0
 				score = 0
 
 		if event.type == SPAWNPIPE:
@@ -172,6 +175,5 @@ while True:
 	if floor_x_pos <= -576:
 		floor_x_pos = 0
 	
-
 	pygame.display.update()
-	clock.tick(120)
+	clock.tick(fps)
