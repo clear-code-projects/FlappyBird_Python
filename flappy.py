@@ -126,7 +126,7 @@ while True:
 				game_active = True
 				pipe_list.clear()
 				bird_rect.center = (100,512)
-				#bird_movement = 0
+				bird_movement = 0
 				score = 0
 
 		if event.type == SPAWNPIPE:
