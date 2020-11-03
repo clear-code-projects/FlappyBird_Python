@@ -22,7 +22,11 @@ def draw_pipes(pipes):
 		else:
 			flip_pipe = pygame.transform.flip(pipe_surface,False,True)
 			screen.blit(flip_pipe,pipe)
-
+def remove_pipes(pipes):
+	for pipe in pipes:
+		if pipe.centerx == -600:
+			pipes.remove(pipe)
+	return pipes
 def check_collision(pipes):
 	for pipe in pipes:
 		if bird_rect.colliderect(pipe):
@@ -126,7 +130,7 @@ while True:
 				game_active = True
 				pipe_list.clear()
 				bird_rect.center = (100,512)
-				#bird_movement = 0
+				bird_movement = 0
 				score = 0
 
 		if event.type == SPAWNPIPE:
@@ -152,6 +156,7 @@ while True:
 
 		# Pipes
 		pipe_list = move_pipes(pipe_list)
+		pipe_list = remove_pipes(pipe_list)
 		draw_pipes(pipe_list)
 		
 		score += 0.01
