@@ -170,13 +170,11 @@ while True:
 		high_score = update_score(score,high_score)
 		score_display('game_over')
 
-
 	# Floor
 	floor_x_pos -= 1
 	draw_floor()
 	if floor_x_pos <= -576:
 		floor_x_pos = 0
 	
-
 	pygame.display.update()
 	clock.tick(120)
