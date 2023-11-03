@@ -24,7 +24,7 @@ def draw_pipes(pipes):
 			screen.blit(flip_pipe,pipe)
 def remove_pipes(pipes):
 	for pipe in pipes:
-		if pipe.centerx == -600:
+		if pipe.centerx <= -600:
 			pipes.remove(pipe)
 	return pipes
 def check_collision(pipes):
